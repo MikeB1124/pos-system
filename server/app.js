@@ -15,11 +15,24 @@ mongoose.connect(URI)
 
 
 
-app.get('/',(req,res)=>{
-    res.send('Hello server')
+app.get('/users',(req,res)=>{
+    // const user = {
+    //     firstName: `${req.params.firstName}`,
+    //     lastName: `${req.params.lastName}`
+    // }
+    // console.log(user);
+    User.find()
+    .exec()
+    .then(doc => {
+        res.status(200).json(doc)
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json({error: err});
+    });
+    
+    
 })
-
-
 
 
     app.post('/add-user', (req, res) => {
@@ -39,8 +52,6 @@ app.get('/',(req,res)=>{
             City,
             postalCode,
             phoneNumber
-
-
         }
 
         const newUser = new User(data)

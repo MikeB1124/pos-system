@@ -12,3 +12,16 @@ export async function createUser(user){
             console.log('error',err)
         })
 }
+
+
+export async function getUsers(){
+    return fetch(`http://localhost:4000/users`,{
+        method:'GET',
+        headers:{
+            'Content-Type':'application/json'
+        },
+    }).then(res=>res.json())
+    .then(data =>{
+        return data
+    })
+}

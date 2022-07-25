@@ -1,5 +1,6 @@
 import {useState} from 'react';
 import { createUser } from '../services';
+import {Link, useNavigate} from 'react-router-dom';
 import Input from '../components/Input.js'
 import '../styles/input.scss';
 
@@ -7,7 +8,7 @@ import '../styles/input.scss';
 
 
 function Signup() {
-
+    let navigate = useNavigate();
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
@@ -38,6 +39,8 @@ function Signup() {
             setPassword('');
             setCompany('');
         })
+
+        navigate('/');
     }
 
     return (
@@ -51,7 +54,7 @@ function Signup() {
                 <Input placeholder="Password" type="password" onChange={event => setPassword(event.target.value)} value={password}/>
                 <Input placeholder="Company" type="text" onChange={event => setCompany(event.target.value)} value={company}/>
                 <button type="submit">Submit</button>
-                <a>Already have an account? Login Here</a>      
+                <Link to="/">Already have an account? Login Here</Link>      
             </form>                
         </div>        
 
