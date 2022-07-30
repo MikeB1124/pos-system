@@ -37,9 +37,7 @@ app.get('/users',(req,res)=>{
 
     app.post('/add-user', (req, res) => {
 
-        console.log(req.body)
-
-        const {role, firstName,lastName,username,password,companyName,Street,City,postalCode,phoneNumber} = req.body
+        const {role, firstName,lastName,username,password,companyName, groupID} = req.body
 
         const data ={
             role,
@@ -48,10 +46,7 @@ app.get('/users',(req,res)=>{
             username,
             password,
             companyName,
-            Street,
-            City,
-            postalCode,
-            phoneNumber
+            groupID
         }
 
         const newUser = new User(data)
