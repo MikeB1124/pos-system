@@ -10,7 +10,8 @@ const userSchema = new Schema({
     username: String,
     password: String,
     companyName: String,
-    groupID: Number
+    groupID: Number,
+    printerIP: String,
 }, {timestamps: true});
 
 const User = mongoose.model('User', userSchema);

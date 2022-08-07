@@ -2,7 +2,6 @@ import React from "react";
 import '../styles/black-dashboard-react.css'
 import {useState} from 'react';
 import {useNavigate, Link, Router} from "react-router-dom";
-import {userValidate} from '../validate'
 import {getUsers} from '../services'
 
 import {

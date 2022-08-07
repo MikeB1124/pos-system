@@ -3,6 +3,7 @@ import { createUser } from '../services';
 import {useNavigate, Link} from 'react-router-dom';
 import {useState} from 'react';
 import {getUsers} from '../services'
+import {getAdminInfo} from '../globalValues'
 import PasswordChecklist from "react-password-checklist"
 
 
@@ -24,8 +25,9 @@ const SignupForm = () => {
     const [password, setPassword] = useState('');
     const [company, setCompany] = useState('');
     const [groupID, setGroupID] = useState('');
-    const [groupidFound, setGroupidFound] = useState(null);
-    const [usernameFound, setUsernameFound] = useState(null);
+    var printer;
+    var groupidFound = false;
+    var usernameFound = false;
     const [bannerFailAlert, setBannerFailAlert] = useState(false);
     const [bannerSuccessAlert, setBannerSuccessAlert] = useState(false);
 
@@ -35,6 +37,7 @@ const SignupForm = () => {
     }
 
     function validateSignup(){
+      
         const user = {
             role: "client",
             firstName: firstName,
@@ -42,7 +45,8 @@ const SignupForm = () => {
             username: username,
             password: password,
             companyName: company,
-            groupID: groupID
+            groupID: groupID,
+            printerIP: null,
         }
 
         const promise = getUsers();
@@ -50,20 +54,20 @@ const SignupForm = () => {
         promise.then((users) => {
             users.filter((user) => {
                 if(user.groupID == groupID && user.role == "admin"){
-                    setGroupidFound(true);
+                    groupidFound = true;
+                    printer = user.printerIP;
                 }
                 if(user.username == username){
-                    setUsernameFound(true);
+                    usernameFound = true;
                 }
             });
-
+            
             if(groupidFound && !usernameFound){
                 createUser(user)
                 .then(()=>{
-                    
+                  accountCreatedSuccessfully();
                 });
-                accountCreatedSuccessfully();
-                navigate('/login');
+                
             }else{
                 invalidInput();
             }
@@ -80,11 +84,13 @@ const SignupForm = () => {
     }
 
     function accountCreatedSuccessfully(){
-        setBannerFailAlert(true);
+        setBannerSuccessAlert(true);
 
         setTimeout(() => {
-            setBannerFailAlert(false);
-        }, 3000)
+            navigate('/login');
+            setBannerSuccessAlert(false);
+            getAdminInfo(groupID, printer, username, password)
+        }, 1000)
     }
     
 

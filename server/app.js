@@ -16,11 +16,6 @@ mongoose.connect(URI)
 
 
 app.get('/users',(req,res)=>{
-    // const user = {
-    //     firstName: `${req.params.firstName}`,
-    //     lastName: `${req.params.lastName}`
-    // }
-    // console.log(user);
     User.find()
     .exec()
     .then(doc => {
@@ -35,32 +30,45 @@ app.get('/users',(req,res)=>{
 })
 
 
-    app.post('/add-user', (req, res) => {
+app.post('/add-user', (req, res) => {
 
-        const {role, firstName,lastName,username,password,companyName, groupID} = req.body
+    const {role, firstName, lastName, username, password, companyName, groupID, printerIP} = req.body
 
-        const data ={
-            role,
-            firstName,
-            lastName,
-            username,
-            password,
-            companyName,
-            groupID
-        }
+    const data ={
+        role,
+        firstName,
+        lastName,
+        username,
+        password,
+        companyName,
+        groupID,
+        printerIP,
+    }
 
-        const newUser = new User(data)
-        newUser.save()
-        .then(()=>{
-            res.status(200).send(newUser)
-        })
-        .catch((err) => {
-        console.log(err);
-        });
+    const newUser = new User(data)
+    newUser.save()
+    .then(()=>{
+        res.status(200).send(newUser)
+    })
+    .catch((err) => {
+    console.log(err);
     });
+});
+
+app.patch('/user/:id', (req,res) => {
+    User.findByIdAndUpdate(req.params.id, req.body)
+    .then((user) => {
+        if(!user){
+            res.status(404).send()
+        }
+        res.send(user)
+    }).catch((err) => {
+        res.status(500).send(err)
+    })
+})
 
 
 
 app.listen(4000,()=>{
-    console.log(`server is runiing on port 4000`)
+    console.log(`server is running on port 4000`)
 })

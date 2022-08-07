@@ -25,3 +25,17 @@ export async function getUsers(){
         return data
     })
 }
+
+export async function updatePrinterIP(objectID, printer){
+    fetch(`http://localhost:4000/user/${objectID}`,{
+            method:'PATCH',
+            headers:{
+                'Content-Type':'application/json'
+            },
+            body:JSON.stringify({
+                printerIP: printer
+            })
+        }).catch(err=>{
+            console.log('error',err)
+        })
+}
