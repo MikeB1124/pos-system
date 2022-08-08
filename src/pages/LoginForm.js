@@ -2,7 +2,8 @@ import React from "react";
 import '../styles/black-dashboard-react.css'
 import {useState} from 'react';
 import {useNavigate, Link, Router} from "react-router-dom";
-import {getUsers} from '../services'
+import {getUsers} from '../userServices'
+import {initializeAdminInfo} from '../globalValues'
 
 import {
   FormGroup,
@@ -23,8 +24,8 @@ const LoginForm = () => {
   const [bannerFailAlert, setBannerFailAlert] = useState(false);
   let userFound = false;
   let isAdmin = false;
-  
 
+  
   const handleSubmit = event => {
     event.preventDefault();
     validateLogin();
@@ -37,6 +38,7 @@ function validateLogin(){
     users.filter(user => {
       if(user.username === username && user.password === password){
         userFound = true;
+        initializeAdminInfo(user.groupID, user.printerIP);
         if(user.role === "admin"){
           isAdmin = true;
         }

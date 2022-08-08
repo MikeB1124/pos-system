@@ -1,9 +1,8 @@
 import React from "react";
-import { createUser } from '../services';
+import { createUser, getUsers } from '../userServices';
 import {useNavigate, Link} from 'react-router-dom';
 import {useState} from 'react';
-import {getUsers} from '../services'
-import {getAdminInfo} from '../globalValues'
+import {initializePrinter} from '../globalValues'
 import PasswordChecklist from "react-password-checklist"
 
 
@@ -89,7 +88,7 @@ const SignupForm = () => {
         setTimeout(() => {
             navigate('/login');
             setBannerSuccessAlert(false);
-            getAdminInfo(groupID, printer, username, password)
+            initializePrinter(groupID, printer, username, password)
         }, 1000)
     }
     

@@ -1,6 +1,7 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import User from './models/users.js';
+import Menu from './models/menu.js';
 import cors from 'cors'
 const app = express();
 
@@ -62,6 +63,59 @@ app.patch('/user/:id', (req,res) => {
             res.status(404).send()
         }
         res.send(user)
+    }).catch((err) => {
+        res.status(500).send(err)
+    })
+})
+
+
+
+//Menu Items
+app.get('/menu-items',(req,res)=>{
+    Menu.find()
+    .exec()
+    .then(doc => {
+        res.status(200).json(doc)
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json({error: err});
+    });
+    
+    
+})
+
+app.post('/add-menu-item', (req, res) => {
+
+    const {groupId, menuId, meal, title, description, addOn, price} = req.body
+
+    const data ={
+        groupId,
+        menuId,
+        meal,
+        title,
+        description,
+        addOn,
+        price,
+    }
+
+    const newMenuItem = new Menu(data)
+    newMenuItem.save()
+    .then(()=>{
+        res.status(200).send(newMenuItem)
+    })
+    .catch((err) => {
+    console.log(err);
+    });
+});
+
+app.patch('/menu-item/:id', (req,res) => {
+    Menu.findByIdAndUpdate(req.params.id, req.body)
+    .then((menu) => {
+        if(!menu){
+            res.status(404).send()
+        }
+        res.send(menu)
     }).catch((err) => {
         res.status(500).send(err)
     })

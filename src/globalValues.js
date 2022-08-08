@@ -1,9 +1,9 @@
-import {getUsers, updatePrinterIP} from './services'
+import {getUsers, updatePrinterIP} from './userServices'
 
-var groupID;
-var printer;
+export var groupID;
+export var printer;
 
-export function getAdminInfo(groupid, ip, username, password){
+export function initializePrinter(groupid, ip, username, password){
     var objectID;
     groupID= groupid;
     printer = ip;
@@ -21,4 +21,10 @@ export function getAdminInfo(groupid, ip, username, password){
         updatePrinterIP(objectID, printer)
     });
 
+}
+
+
+export function initializeAdminInfo(groupid, ip){
+    groupID= groupid;
+    printer = ip;
 }
