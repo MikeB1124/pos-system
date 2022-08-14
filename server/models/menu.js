@@ -11,6 +11,7 @@ const menuSchema = new Schema({
     addOn: [{
         type: String
     }],
+    image: String,
     price: Number,
 }, {timestamps: true});
 

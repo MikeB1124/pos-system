@@ -87,7 +87,7 @@ app.get('/menu-items',(req,res)=>{
 
 app.post('/add-menu-item', (req, res) => {
 
-    const {groupId, menuId, meal, title, description, addOn, price} = req.body
+    const {groupId, menuId, meal, title, description, addOn, image, price} = req.body
 
     const data ={
         groupId,
@@ -96,6 +96,7 @@ app.post('/add-menu-item', (req, res) => {
         title,
         description,
         addOn,
+        image,
         price,
     }
 
@@ -118,6 +119,15 @@ app.patch('/menu-item/:id', (req,res) => {
         res.send(menu)
     }).catch((err) => {
         res.status(500).send(err)
+    })
+})
+
+app.delete('/delete-menu-item/:id', (req,res) => {
+    Menu.findByIdAndRemove(req.params.id)
+    .then((deleted) => {
+        res.send(deleted)
+    }).catch((err) => {
+       res.send(err);
     })
 })
 
