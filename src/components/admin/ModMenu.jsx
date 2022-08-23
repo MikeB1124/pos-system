@@ -59,7 +59,7 @@ const deleteItem = useCallback(
         setRows((prevRows) => prevRows.filter((row) => row.id !== id));
         getMenuItems().then((items) => {
             items.forEach((item) =>{
-               if(item.groupID == groupID && item.menuId == id){
+               if(item.groupId == groupID && item.menuId == id){
                     setDeleteObjectId(item._id)
                     deleteMenuItem(deleteObjectId)
                }
@@ -74,8 +74,8 @@ const updateItem = useCallback(
         setOpenUpdateModal(!openUpdateModal)
         getMenuItems().then((items) => {
             items.forEach((item) =>{
-                console.log(item.image)
-               if(item.groupID == groupID && item.menuId == id){
+                console.log(groupID)
+               if(item.groupId == groupID && item.menuId == id){
                     setUpdateObjectId(item._id)
                     setUpdateMeal(item.meal);
                     setUpdateItemTitle(item.title);
@@ -144,7 +144,7 @@ function addItem(){
 
     const data = {
     groupId: groupID,
-    menuId: rows.length + 1,
+    menuId: Math.floor(1000 + Math.random() * 9000),
     meal: meal,
     title: itemTitle,
     description: description,

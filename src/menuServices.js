@@ -26,7 +26,7 @@ export async function getMenuItems(){
 }
 
 export async function updateMenuItem(objectID, data){
-    fetch(`http://localhost:4000//menu-item/${objectID}`,{
+ fetch(`http://localhost:4000//menu-item/${objectID}`,{
             method:'PATCH',
             headers:{
                 'Content-Type':'application/json'
