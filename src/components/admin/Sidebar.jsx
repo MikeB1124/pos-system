@@ -14,6 +14,8 @@ import { VscChromeClose } from "react-icons/vsc";
 import {BiFoodMenu} from "react-icons/bi"
 import {TbZoomMoney} from "react-icons/tb"
 import {CgProfile} from "react-icons/cg"
+import {IoLocationSharp} from "react-icons/io5"
+import {TiPrinter} from "react-icons/ti"
 
 function Sidebar(){
     const [currentLink, setCurrentLink] = useState(0)
@@ -23,7 +25,7 @@ function Sidebar(){
                 <div className="top">
                     <div className="brand">
                         <FaTaxi/>
-                        <span>MY TAXI</span>
+                        <span>POS Central</span>
                     </div>
                     <div className="toggle"></div>
                     <div className="links">
@@ -47,13 +49,29 @@ function Sidebar(){
                             <li onClick={() => setCurrentLink(3)} 
                             className={currentLink === 3 ? "active" : ""}
                             >
+                                <Link to="/admin-dashboard/locations">
+                                    <IoLocationSharp/>
+                                    <span>Locations</span>
+                                </Link>
+                            </li>
+                            <li onClick={() => setCurrentLink(4)} 
+                            className={currentLink === 4 ? "active" : ""}
+                            >
+                                <Link to="/admin-dashboard/printers">
+                                    <TiPrinter/>
+                                    <span>Printers</span>
+                                </Link>
+                            </li>
+                            <li onClick={() => setCurrentLink(5)} 
+                            className={currentLink === 5 ? "active" : ""}
+                            >
                                 <Link to="/admin-dashboard/orders">
                                     <TbZoomMoney/>
                                     <span>Orders/Transactions</span>
                                 </Link>
                             </li>
-                            <li onClick={() => setCurrentLink(4)} 
-                            className={currentLink === 4 ? "active" : ""}
+                            <li onClick={() => setCurrentLink(6)} 
+                            className={currentLink === 6 ? "active" : ""}
                             >
                                 <Link to="/admin-dashboard/profile">
                                     <CgProfile/>
@@ -64,10 +82,10 @@ function Sidebar(){
                     </div>
                 </div>
                 <div className="logout">
-                    <a href="#">
+                    <Link to="/">
                         <FiLogOut/>
                         <span className="logout">Logout</span>
-                    </a>
+                    </Link>
                 </div>
             </Section>
         </>

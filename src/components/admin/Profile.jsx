@@ -5,31 +5,9 @@ import { HiOutlineLocationMarker } from "react-icons/hi";
 import { cardStyles } from "./ReusableStyles";
 export default function Profile() {
   return (
-    <Section>
-      <div className="image">
-        <img src={image} alt="" />
-      </div>
-      <div className="title">
-        <h2>Kishan Sheth</h2>
-        <h5>
-          <HiOutlineLocationMarker /> New York, USA
-        </h5>
-      </div>
-      <div className="info">
-        <div className="container">
-          <h5>Days at work</h5>
-          <h3>28</h3>
-        </div>
-        <div className="container">
-          <h5>Rides</h5>
-          <h3>427</h3>
-        </div>
-        <div className="container">
-          <h5>Hours</h5>
-          <h3>76</h3>
-        </div>
-      </div>
-    </Section>
+    <div style={{marginLeft: '18vw', backgroundColor:"white", height: '100vh'}}>
+      Hello WOrld
+    </div>
   );
 }
 const Section = styled.section`

@@ -1,12 +1,12 @@
-import ModMenu from "../../components/admin/ModMenu";
 import Sidebar from "../../components/admin/Sidebar";
+import MenuDataGrid from "../../components/admin/MenuDataGrid"
 
 
 function MenuItems(){
     return (
         <div>
             <Sidebar/>
-            <ModMenu/>
+            <MenuDataGrid/>
         </div>
     );
 }

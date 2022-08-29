@@ -26,16 +26,54 @@ export async function getUsers(){
     })
 }
 
-export async function updatePrinterIP(objectID, printer){
+export async function updateSubscriptionStatus(objectID, status){
     fetch(`http://localhost:4000/user/${objectID}`,{
             method:'PATCH',
             headers:{
                 'Content-Type':'application/json'
             },
             body:JSON.stringify({
-                printerIP: printer
+                subscriptionStatus: status
             })
-        }).catch(err=>{
+        }).then(res=> res.json()).then(status => console.log(status)).catch(err=>{
+            console.log('error',err)
+        })
+}
+
+export async function updateLocation(objectID, location){
+    fetch(`http://localhost:4000/update-location/${objectID}`,{
+            method:'PATCH',
+            headers:{
+                'Content-Type':'application/json'
+            },
+            body:JSON.stringify(location)
+        }).then(res=> res.json()).then(status => console.log(status)).catch(err=>{
+            console.log('error',err)
+        })
+}
+
+export async function updateUserPrinter(objectID, printerObjectID, action){
+    fetch(`http://localhost:4000/update-user-printers/${objectID}`,{
+            method:'PATCH',
+            headers:{
+                'Content-Type':'application/json'
+            },
+            body:JSON.stringify({
+                action: action,
+                printer: printerObjectID
+            })
+        }).then(res=> res.json()).then(status => console.log(status)).catch(err=>{
+            console.log('error',err)
+        })
+}
+
+export async function deleteUser(objectID){
+    fetch(`http://localhost:4000/delete-user/${objectID}`,{
+            method:'DELETE',
+            headers:{
+                'Content-Type':'application/json'
+            },
+        }).then(res=> res.json()).then(status => console.log(status)).catch(err=>{
             console.log('error',err)
         })
 }

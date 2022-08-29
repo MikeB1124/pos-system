@@ -26,7 +26,7 @@ export async function getMenuItems(){
 }
 
 export async function updateMenuItem(objectID, data){
-    fetch(`http://localhost:4000//menu-item/${objectID}`,{
+    fetch(`http://localhost:4000/menu-item/${objectID}`,{
             method:'PATCH',
             headers:{
                 'Content-Type':'application/json'
@@ -41,7 +41,7 @@ export async function updateMenuItem(objectID, data){
 }
 
 export async function deleteMenuItem(objectID){
-    fetch(`http://localhost:4000//delete-menu-item/${objectID}`,{
+    fetch(`http://localhost:4000/delete-menu-item/${objectID}`,{
             method:'DELETE',
             headers:{
                 'Content-Type':'application/json'

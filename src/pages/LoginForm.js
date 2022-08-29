@@ -38,7 +38,8 @@ function validateLogin(){
     users.filter(user => {
       if(user.username === username && user.password === password){
         userFound = true;
-        initializeAdminInfo(user.groupID, user.printerIP);
+        initializeAdminInfo(user.groupID);
+        localStorage.setItem('groupID', user.groupID);
         if(user.role === "admin"){
           isAdmin = true;
         }
@@ -94,7 +95,6 @@ function invalidInput(){
             Login
           </Button>
         </form>
-        <Link to="/signup">Not a member? Sign Up Here</Link>
       </CardBody>
     </Card>
     </>
