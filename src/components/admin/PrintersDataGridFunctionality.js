@@ -217,7 +217,7 @@ function refreshPage(){
         <div style={{marginLeft: '18vw', backgroundColor:"white", height: '100vh'}}>
             <Button style={{margin: '5px'}} onClick={refreshPage}><RefreshIcon/></Button>   
             <Button style={{margin: '5px'}} color="success" variant="contained"  startIcon={<AddIcon />} onClick={handleAddModal}>
-                Add Printer
+                Add Printers
             </Button>
 
 
