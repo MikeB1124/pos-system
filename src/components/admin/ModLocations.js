@@ -5,13 +5,13 @@ import {useState} from "react"
 function ModLocations(){
     const groupID = localStorage.getItem('groupID')
     const [status, setStatus] = useState(null)
-
+    
     const promise = getUsers();
     
     promise.then((users) => {
         users.filter(user => {
         if(user.groupID == groupID && user.role === "admin"){
-            if(user.session_id.length > 0){
+            if(user.session_id != undefined){
                 fetch(`http://localhost:4000/subscription-info/${user.session_id}`, {
                 method: 'GET',
                 headers: { 'Content-Type': 'application/json'},
@@ -19,6 +19,8 @@ function ModLocations(){
                     setStatus(status.status)
                     updateLocation(user._id, status)
                 }).catch(e => console.log(e.message));
+            }else{
+                setStatus(false)
             }
             
         }

@@ -5,12 +5,22 @@ import User from './models/users.js';
 import Menu from './models/menu.js';
 import Printer from './models/printer.js'
 import cors from 'cors'
-const app = express();
+import http from 'http'
+import {Server} from "socket.io" 
 
-app.use(express.json())
+const app = express();
+const server = http.createServer(app)
+const io = new Server(server, {
+    cors: {
+        origin: "http://localhost:3000",
+        methods: ['GET', 'POST'],
+        credentials: true
+    }
+})
 app.use(cors({
     origin: 'http://localhost:3000',
 }))
+app.use(express.json())
 app.use(express.static("public"))
 
 const URI = "mongodb+srv://Mike:cciQ6jfqxjt6Yo7C@cluster0.du0vf.mongodb.net/pos-systemDB?retryWrites=true&w=majority";
@@ -21,6 +31,28 @@ const CLIENT_DOMAIN = 'http://localhost:3000'
 mongoose.connect(URI)
 .then((res) => console.log('database connected'))
 .catch((err) => console.log(err));
+
+
+io.on("connection", socket => {
+    
+
+    socket.on('join-room', (groupId) => {
+        socket.join(groupId)
+    })
+
+    socket.on('added-menu-item', (data) => {
+        socket.to(data.groupId).emit('display-item', data)
+    })
+    
+})
+
+
+
+
+
+
+
+
 
 
 //User Methods
@@ -325,6 +357,6 @@ app.post('/create-checkout-session', async (req, res) => {
 
 
 
-app.listen(4000,()=>{
+server.listen(4000,()=>{
     console.log(`server is running on port 4000`)
 })

@@ -6,7 +6,7 @@ import {getUsers, updateSubscriptionStatus} from '../../userServices'
 import CircularProgress from '@mui/material/CircularProgress';
 
 function ValidateSubscription(props){
-
+    
     function checkoutSession(){
         fetch("http://localhost:4000/create-checkout-session", {
             method: 'POST',

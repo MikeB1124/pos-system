@@ -13,6 +13,9 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Chip from '@mui/material/Chip';
+import {io} from 'socket.io-client'
+import socket from '../../socketConfig'
+
 
 
 
@@ -25,6 +28,7 @@ const addOnList = [
 
 
 function MenuDataGridFunctionality({rows, forceUpdate}){
+// const socket = io("http://localhost:4000");
 const groupID = localStorage.getItem('groupID');
 const [openAddModal, setOpenAddModal] = useState(false);
 const [openUpdateModal, setOpenUpdateModal] = useState(false);
@@ -131,7 +135,7 @@ const handleAddOnChange = (event) => {
 };
 
 function addItem(){
-
+    
     const data = {
     groupId: groupID,
     menuId: Math.floor(1000 + Math.random() * 9000),
@@ -145,9 +149,14 @@ function addItem(){
     
 
     addMenuItem(data)
+    socket.emit("added-menu-item", data)
     handleAddModal()
     window.location.reload()
 }
+
+useEffect(() => {
+    socket.emit('join-rom', groupID)
+}, [])
 
 function patchItem(){
     const data = {
@@ -170,6 +179,7 @@ function refreshPage(){
     window.location.reload()
 }
 
+
     
 
 return (
@@ -178,8 +188,7 @@ return (
         <Button style={{margin: '5px'}} color="success" variant="contained"  startIcon={<AddIcon />} onClick={handleAddModal}>
             Add Item
         </Button>
-
-
+        
         <Modal isOpen={openAddModal} toggle={handleAddModal}>
             <div className="modal-header">
             <button type="button" className="close" data-dismiss="modal" aria-label="Close" onClick={handleAddModal}>

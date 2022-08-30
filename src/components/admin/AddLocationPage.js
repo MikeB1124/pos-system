@@ -34,7 +34,7 @@ function AddLocationPage(props){
     const [editPostalCode, setEditPostalCode] = useState("")
     const [editState, setEditState] = useState("")
     const [editPhone, setEditPhone] = useState("")
-
+    
     function handleAddLocationModal(){
         setAddLocationModal(!addLocationModal)
         
