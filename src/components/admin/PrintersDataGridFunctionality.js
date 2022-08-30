@@ -40,7 +40,7 @@ const deleteItem = useCallback(
         getPrinters().then((printers) => {
             printers.forEach((printer) =>{
                if(printer.groupID == groupID && printer.printerID == id){
-                    deleteUserPrinter(id)
+                    // deleteUserPrinter(id)
                     deletePrinter(printer._id)
                     setTimeout(() => {
                         window.location.reload()
@@ -204,7 +204,9 @@ function patchPrinterItem(){
 
         updatePrinter(updateObjectId, printer)
         handleUpdateModal()
-        window.location.reload()
+        setTimeout(() => {
+            window.location.reload()
+        }, 3000)
 }
 
 

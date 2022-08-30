@@ -28,7 +28,6 @@ const addOnList = [
 
 
 function MenuDataGridFunctionality({rows, forceUpdate}){
-// const socket = io("http://localhost:4000");
 const groupID = localStorage.getItem('groupID');
 const [openAddModal, setOpenAddModal] = useState(false);
 const [openUpdateModal, setOpenUpdateModal] = useState(false);
@@ -57,7 +56,9 @@ const deleteItem = useCallback(
             items.forEach((item) =>{
                if(item.groupId == groupID && item.menuId == id){
                     deleteMenuItem(item._id)
-                    window.location.reload()
+                    setTimeout(() => {
+                        window.location.reload()
+                    }, 3000)
                }
             })
             }).catch((err) => console.log(err))
@@ -147,11 +148,13 @@ function addItem(){
     price: price
     };
     
-
+    
     addMenuItem(data)
     socket.emit("added-menu-item", data)
     handleAddModal()
-    window.location.reload()
+    setTimeout(() => {
+        window.location.reload()
+    }, 3000)
 }
 
 useEffect(() => {
@@ -171,7 +174,9 @@ function patchItem(){
 
         updateMenuItem(updateObjectId, data)
         handleUpdateModal()
-        window.location.reload()
+        setTimeout(() => {
+            window.location.reload()
+        }, 3000)
 }
 
 

@@ -84,7 +84,7 @@ const cardHeaderStyle = {
     margin: "0px",
     fontSize: "1.125rem",
     lineHeight: "1.625",
-    fontFamily: "sans-serif",
+    fontFamily: "Montserrat",
     opacity: "1",
     textTransform: "capitalize",
     verticalAlign: "unset",
