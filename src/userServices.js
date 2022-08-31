@@ -1,5 +1,5 @@
 export async function createUser(user){
-    fetch(`http://trimana-pos-central.herokuapp.com/add-user`,{
+    fetch(`https://trimana-pos-central.herokuapp.com/add-user`,{
             method:'POST',
             headers:{
                 'Content-Type':'application/json'
@@ -15,7 +15,7 @@ export async function createUser(user){
 
 
 export async function getUsers(){
-    return fetch(`http://trimana-pos-central.herokuapp.com/users`,{
+    return fetch(`https://trimana-pos-central.herokuapp.com/users`,{
         method:'GET',
         headers:{
             'Content-Type':'application/json'
@@ -27,7 +27,7 @@ export async function getUsers(){
 }
 
 export async function updateSubscriptionStatus(objectID, status){
-    fetch(`http://trimana-pos-central.herokuapp.com/user/${objectID}`,{
+    fetch(`https://trimana-pos-central.herokuapp.com/user/${objectID}`,{
             method:'PATCH',
             headers:{
                 'Content-Type':'application/json'
@@ -41,7 +41,7 @@ export async function updateSubscriptionStatus(objectID, status){
 }
 
 export async function updateLocation(objectID, location){
-    fetch(`http://trimana-pos-central.herokuapp.com/update-location/${objectID}`,{
+    fetch(`https://trimana-pos-central.herokuapp.com/update-location/${objectID}`,{
             method:'PATCH',
             headers:{
                 'Content-Type':'application/json'
@@ -53,7 +53,7 @@ export async function updateLocation(objectID, location){
 }
 
 export async function updateUserPrinter(objectID, printerObjectID, action){
-    fetch(`http://trimana-pos-central.herokuapp.com/update-user-printers/${objectID}`,{
+    fetch(`https://trimana-pos-central.herokuapp.com/update-user-printers/${objectID}`,{
             method:'PATCH',
             headers:{
                 'Content-Type':'application/json'
@@ -68,7 +68,7 @@ export async function updateUserPrinter(objectID, printerObjectID, action){
 }
 
 export async function deleteUser(objectID){
-    fetch(`http://trimana-pos-central.herokuapp.com/delete-user/${objectID}`,{
+    fetch(`https://trimana-pos-central.herokuapp.com/delete-user/${objectID}`,{
             method:'DELETE',
             headers:{
                 'Content-Type':'application/json'

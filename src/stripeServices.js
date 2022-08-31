@@ -7,7 +7,7 @@ export async function cancelSubscriptionPortal(){
     promise.then((users) => {
         users.forEach(user => {
             if(user.groupID == groupID && user.role === "admin"){
-                fetch(`http://trimana-pos-central.herokuapp.com/customer-billing-info/${user.session_id}`, {
+                fetch(`https://trimana-pos-central.herokuapp.com/customer-billing-info/${user.session_id}`, {
                     method: 'POST',
                     headers: {
                         "Content-Type": "application/json",
