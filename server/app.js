@@ -5,13 +5,13 @@ import User from './models/users.js';
 import Menu from './models/menu.js';
 import Printer from './models/printer.js'
 import cors from 'cors'
-import http from 'http'
+import https from 'https'
 import {Server} from "socket.io" 
 
 const PORT = process.env.PORT || 4000
 
 const app = express();
-const server = http.createServer(app)
+const server = https.createServer(app)
 const io = new Server(server, {
     cors: {
         origin: "http://https://trimana-pos-system-frontend.herokuapp.com",
