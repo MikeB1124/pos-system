@@ -8,7 +8,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 function ValidateSubscription(props){
     
     function checkoutSession(){
-        fetch("https://trimana-pos-central.herokuapp.com/create-checkout-session", {
+        fetch("http://localhost:4000/create-checkout-session", {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",

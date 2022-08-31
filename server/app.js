@@ -14,21 +14,21 @@ const app = express();
 const server = http.createServer(app)
 const io = new Server(server, {
     cors: {
-        origin: "https://trimana-pos-system-frontend.herokuapp.com",
+        origin: "http://localhost:3000",
         methods: ['GET', 'POST'],
         credentials: true
     }
 })
 app.use(cors({
-    origin: 'https://trimana-pos-system-frontend.herokuapp.com',
+    origin: 'http://localhost:3000',
 }))
 app.use(express.json())
  
 
 const URI = "mongodb+srv://Mike:cciQ6jfqxjt6Yo7C@cluster0.du0vf.mongodb.net/pos-systemDB?retryWrites=true&w=majority";
 const stripe = Stripe('sk_test_LmSrJNEvuxswULy5z2CFDcSe00jo5ryk69');
-const SERVER_DOMAIN = 'https://trimana-pos-central.herokuapp.com'
-const CLIENT_DOMAIN = 'https://trimana-pos-system-frontend.herokuapp.com'
+const SERVER_DOMAIN = 'http:localhost:4000'
+const CLIENT_DOMAIN = 'http://localhost:3000'
 
 mongoose.connect(URI)
 .then((res) => console.log('database connected'))

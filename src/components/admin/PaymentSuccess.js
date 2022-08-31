@@ -9,7 +9,7 @@ function PaymentSuccess(){
 
     function fetchSession(){
 
-        fetch(`https://trimana-pos-central.herokuapp.com/payment-success?session_id=${session_id}`, {
+        fetch(`http://localhost:4000/payment-success?session_id=${session_id}`, {
             method: 'GET',
             headers: { 'Content-Type': 'application/json'},
         }).then(response => response.json()).then(status => {
