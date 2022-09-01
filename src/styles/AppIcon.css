@@ -1,3 +1,5 @@
-.individualContainer{
-    background-color: red
+#individualAppContainer:hover{
+    transform: scale(0.9);
+    transition: 1s ease;
 }
+

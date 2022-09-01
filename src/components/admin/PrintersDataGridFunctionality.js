@@ -40,11 +40,8 @@ const deleteItem = useCallback(
         getPrinters().then((printers) => {
             printers.forEach((printer) =>{
                if(printer.groupID == groupID && printer.printerID == id){
-                    // deleteUserPrinter(id)
+                    deleteUserPrinter(id)
                     deletePrinter(printer._id)
-                    setTimeout(() => {
-                        window.location.reload()
-                    }, 3000)
                }
             })
             }).catch((err) => console.log(err))
@@ -129,6 +126,7 @@ function deleteUserPrinter(id){
                         updateUserPrinter(user._id, printerObjectID, "delete")
                     }
                     });
+                    window.location.reload()
                 });
             }
         })
@@ -154,11 +152,14 @@ function addUserPrinter(){
                     users.forEach(user => {
                     if(user.groupID == groupID && user.role === "admin"){
                         updateUserPrinter(user._id, printerObjectID, "add")
+                
                         
                     }else if(user.groupID == groupID && user.role === "client" && user.street === storeLocation){
                         updateUserPrinter(user._id, printerObjectID, "add")
+                      
                     }
                     });
+                    window.location.reload()
                 });
             }
         })
@@ -186,10 +187,12 @@ function addPrinterItem(){
 
     addPrinter(printer)
     addUserPrinter()
+    
     handleAddModal()
-    setTimeout(() => {
-        window.location.reload()
-    }, 3000)
+
+    // setTimeout(() => {
+    //     window.location.reload()
+    // }, 3000)
 }
 
 function patchPrinterItem(){

@@ -47,7 +47,9 @@ const [updateAddOns, setUpdateAddOns] = useState([]);
 const [updatePrice, setUpdatePrice] = useState(0.0);
 const [updateImg, setUpdateImg] = useState('');
 
-
+function callSocket(meal){
+    socket.emit("modified-menu-item", {meal: meal, groupID: groupID})
+}
 
 const deleteItem = useCallback(
     (id) => () => {
@@ -57,6 +59,7 @@ const deleteItem = useCallback(
                if(item.groupId == groupID && item.menuId == id){
                     deleteMenuItem(item._id)
                     setTimeout(() => {
+                        callSocket(item.meal)
                         window.location.reload()
                     }, 3000)
                }
@@ -135,6 +138,16 @@ const handleAddOnChange = (event) => {
     );
 };
 
+const handleUpdateOnChange = (event) => {
+    const {
+    target: { value },
+    } = event;
+    setUpdateAddOns(
+    // On autofill we get a stringified value.
+    typeof value === 'string' ? value.split(',') : value,
+    );
+};
+
 function addItem(){
     
     const data = {
@@ -150,15 +163,15 @@ function addItem(){
     
     
     addMenuItem(data)
-    socket.emit("added-menu-item", data)
     handleAddModal()
     setTimeout(() => {
+        callSocket(data.meal)
         window.location.reload()
     }, 3000)
 }
 
 useEffect(() => {
-    socket.emit('join-rom', groupID)
+    socket.emit('join-room', groupID)
 }, [])
 
 function patchItem(){
@@ -175,12 +188,14 @@ function patchItem(){
         updateMenuItem(updateObjectId, data)
         handleUpdateModal()
         setTimeout(() => {
+            callSocket(data.meal)
             window.location.reload()
         }, 3000)
 }
 
 
 function refreshPage(){
+    
     window.location.reload()
 }
 
@@ -247,7 +262,7 @@ return (
                                 key={addOn}
                                 value={addOn}
                                 >
-                                {addOn}
+                                {updateAddOns}
                                 </MenuItem>
                             ))}
                         </Select>
@@ -317,7 +332,7 @@ return (
                         <Select
                             multiple
                             value={updateAddOns}
-                            onChange={handleAddOnChange}
+                            onChange={handleUpdateOnChange}
                             
                             renderValue={(selected) => (
                             <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>

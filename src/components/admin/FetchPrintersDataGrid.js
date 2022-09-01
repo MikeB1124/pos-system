@@ -12,6 +12,7 @@ function FetchPrintersDataGrid(){
         
     // }, [])
 
+    
     getPrinters().then((printers) => {
         printers.forEach((printer) =>{
             

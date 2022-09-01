@@ -7,6 +7,8 @@ import Printer from './models/printer.js'
 import cors from 'cors'
 import http from 'http'
 import {Server} from "socket.io" 
+import fetch from "node-fetch";
+
 
 const PORT = process.env.PORT || 4000
 
@@ -36,16 +38,17 @@ mongoose.connect(URI)
 
 
 io.on("connection", socket => {
-    
 
     socket.on('join-room', (groupId) => {
         socket.join(groupId)
     })
 
-    socket.on('added-menu-item', (data) => {
-        socket.to(data.groupId).emit('display-item', data)
+    socket.on('modified-menu-item', (data) => {
+        const regex = /special/
+        if(regex.test(data.meal.toLowerCase())){
+            socket.to(data.groupID).emit('display-item', "")
+        }
     })
-    
 })
 
 
@@ -144,7 +147,7 @@ app.patch('/update-location/:id', (req,res) => {
 })
 
 app.patch('/update-user-printers/:id', (req,res) => {
-   console.log(req.body.printer)
+   console.log(req.body.action)
     if(req.body.action === "add"){
         User.findByIdAndUpdate(req.params.id,  { $push: { printers: req.body.printer} })
         .then((user) => {
@@ -157,7 +160,7 @@ app.patch('/update-user-printers/:id', (req,res) => {
         })
     }else if(req.body.action === "delete"){
         
-        User.updateOne({_id: req.params.id}, {$pull: {printers: {$elemMatch: req.body.printer}}})
+        User.findByIdAndUpdate({_id: req.params.id}, {$pull: {printers: {$elemMatch: req.body.printer}}})
         .then((user) => {
             if(!user){
                 res.status(404).send()
@@ -166,10 +169,7 @@ app.patch('/update-user-printers/:id', (req,res) => {
         }).catch((err) => {
             res.status(500).send(err)
         })
-    }else{
-
     }
-    
 })
 
 app.delete('/delete-user/:id', (req,res) => {

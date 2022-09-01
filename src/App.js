@@ -8,6 +8,8 @@ import Profile from './pages/admin/Profile'
 import Locations from "./pages/admin/Locations.js";
 import PaymentSuccess from "../src/components/admin/PaymentSuccess"
 import Printers from "./pages/admin/Printers.js";
+import DailySpecialsBoard from "./components/user/DailySpecialsBoard.js";
+
 
 function App() {
   return (
@@ -22,6 +24,7 @@ function App() {
           <Route exact path="/admin-dashboard/printers" element={<Printers/>}/>
           <Route exact path="/admin-dashboard/orders" element={<Orders/>}/>
           <Route exact path="/admin-dashboard/profile" element={<Profile/>}/>
+          <Route exact path="/apps/daily-specials-board" element={<DailySpecialsBoard/>}/>
           <Route exact path="/success" element={<PaymentSuccess/>}/>
           <Route exact path="/cancel" element={<h1>Fail</h1>}/>
         </Routes>

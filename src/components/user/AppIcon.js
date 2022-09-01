@@ -1,7 +1,8 @@
+import { Link } from 'react-router-dom'
 import {useState} from 'react'
 import '../../styles/AppIcon.css'
 
-function AppIcon(props){
+function AppIcon({img, title, appLink}){
     
 
     
@@ -9,12 +10,14 @@ function AppIcon(props){
     return(
         <div>
             <div style={appsContainer}>
-                <div id="individualContainer" style={individualAppContainer}>
-                    <div style={dailySpecialsBoardContainer}>
-                        <img style={appIconStyle} src={props.img}></img>
-                    </div>
+                <div id='individualAppContainer' style={individualAppContainer}>
+                    <Link to={appLink}>
+                        <div id="appIconHover" style={dailySpecialsBoardContainer}>
+                            <img id="appIcon" style={appIconStyle} src={img}></img>
+                        </div>
+                    </Link>
                     <div>
-                        <h4 style={appTitle}>{props.title}</h4>
+                        <h4 style={appTitle}>{title}</h4>
                     </div>
                 </div>
             </div>
@@ -34,7 +37,8 @@ const appsContainer = {
 }
 
 const individualAppContainer = {
-    textAlign: "center"
+    textAlign: "center",
+    transition: '1s ease'
 }
 
 const appTitle = {
@@ -52,5 +56,5 @@ const appIconStyle = {
 }
 
 const dailySpecialsBoardContainer = {
-
+    
 }
