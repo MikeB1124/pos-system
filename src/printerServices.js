@@ -1,5 +1,5 @@
 export async function addPrinter(printer){
-    fetch(`http://localhost:4000/add-printer`,{
+    fetch(`https://trimana-pos-central.herokuapp.com/add-printer`,{
             method:'POST',
             headers:{
                 'Content-Type':'application/json'
@@ -15,7 +15,7 @@ export async function addPrinter(printer){
 
 
 export async function getPrinters(){
-    return fetch(`http://localhost:4000/printers`,{
+    return fetch(`https://trimana-pos-central.herokuapp.com/printers`,{
         method:'GET',
         headers:{
             'Content-Type':'application/json'
@@ -28,7 +28,7 @@ export async function getPrinters(){
 
 
 export async function updatePrinter(objectID, data){
-    fetch(`http://localhost:4000/printer/${objectID}`,{
+    fetch(`https://trimana-pos-central.herokuapp.com/printer/${objectID}`,{
             method:'PATCH',
             headers:{
                 'Content-Type':'application/json'
@@ -44,7 +44,7 @@ export async function updatePrinter(objectID, data){
 
 
 export async function deletePrinter(objectID){
-    fetch(`http://localhost:4000/delete-printer/${objectID}`,{
+    fetch(`https://trimana-pos-central.herokuapp.com/delete-printer/${objectID}`,{
             method:'DELETE',
             headers:{
                 'Content-Type':'application/json'

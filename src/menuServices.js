@@ -1,5 +1,5 @@
 export async function addMenuItem(item){
-    fetch(`http://localhost:4000/add-menu-item`,{
+    fetch(`https://trimana-pos-central.herokuapp.com/add-menu-item`,{
             method:'POST',
             headers:{
                 'Content-Type':'application/json'
@@ -14,7 +14,7 @@ export async function addMenuItem(item){
 }
 
 export async function getMenuItems(){
-    return fetch(`http://localhost:4000/menu-items`,{
+    return fetch(`https://trimana-pos-central.herokuapp.com/menu-items`,{
         method:'GET',
         headers:{
             'Content-Type':'application/json'
@@ -26,7 +26,7 @@ export async function getMenuItems(){
 }
 
 export async function updateMenuItem(objectID, data){
-    fetch(`http://localhost:4000/menu-item/${objectID}`,{
+    fetch(`https://trimana-pos-central.herokuapp.com/menu-item/${objectID}`,{
             method:'PATCH',
             headers:{
                 'Content-Type':'application/json'
@@ -41,7 +41,7 @@ export async function updateMenuItem(objectID, data){
 }
 
 export async function deleteMenuItem(objectID){
-    fetch(`http://localhost:4000/delete-menu-item/${objectID}`,{
+    fetch(`https://trimana-pos-central.herokuapp.com/delete-menu-item/${objectID}`,{
             method:'DELETE',
             headers:{
                 'Content-Type':'application/json'

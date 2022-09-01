@@ -4,7 +4,7 @@ export function userValidate(checkUsername, checkPassword){
     let found = 0;
     var users;
     
-    const promise = fetch(`http://localhost:4000/users`,{
+    const promise = fetch(`https://trimana-pos-central.herokuapp.com/users`,{
         method:'GET',
         headers:{
             'Content-Type':'application/json'

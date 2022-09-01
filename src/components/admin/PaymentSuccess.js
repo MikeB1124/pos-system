@@ -9,7 +9,7 @@ function PaymentSuccess(){
 
     function fetchSession(){
 
-        fetch(`http://localhost:4000/payment-success?session_id=${session_id}`, {
+        fetch(`https://trimana-pos-central.herokuapp.com/payment-success?session_id=${session_id}`, {
             method: 'GET',
             headers: { 'Content-Type': 'application/json'},
         }).then(response => response.json()).then(status => {
@@ -20,7 +20,7 @@ function PaymentSuccess(){
                     updateSubscriptionStatus(user._id, status)
                     updateLocation(user._id, {session_id: session_id})
                    setTimeout(() => {
-                        window.location = "http://localhost:3000/admin-dashboard/locations"
+                        window.location = "https://trimana-pos-system-frontend.herokuapp.com/admin-dashboard/locations"
                    }, 5000)
                    
                 }
