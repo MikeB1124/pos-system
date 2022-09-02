@@ -16,13 +16,13 @@ const app = express();
 const server = http.createServer(app)
 const io = new Server(server, {
     cors: {
-        origin: "https://trimana-pos-frontend-stg.herokuapp.com",
+        origin: "*",
         methods: ['GET', 'POST'],
         credentials: true
     }
 })
 app.use(cors({
-    origin: 'https://trimana-pos-frontend-stg.herokuapp.com',
+    origin: '*',
 }))
 app.use(express.json())
  
