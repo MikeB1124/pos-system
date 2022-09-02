@@ -74,7 +74,7 @@ function invalidInput(){
     {bannerFailAlert && <Alert color="danger">Username or password was incorrect</Alert>}
     <Card style={{display:'flex', justifyContent:'center'}}>
       <CardBody>
-      <h2>Login To POS Central</h2>
+      <h2>Login To POS Centrals</h2>
         <form onSubmit={handleSubmit}>
           <FormGroup>
             <Label>Username</Label>
