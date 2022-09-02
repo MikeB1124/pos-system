@@ -12,7 +12,7 @@ function ModLocations(){
         users.filter(user => {
         if(user.groupID == groupID && user.role === "admin"){
             if(user.session_id != undefined){
-                fetch(`https://trimana-pos-central.herokuapp.com/subscription-info/${user.session_id}`, {
+                fetch(`https://trimana-pos-backend-stg.herokuapp.com/subscription-info/${user.session_id}`, {
                 method: 'GET',
                 headers: { 'Content-Type': 'application/json'},
                 }).then(response => response.json()).then(status => {
