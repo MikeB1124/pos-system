@@ -7,8 +7,6 @@ import Printer from './models/printer.js'
 import cors from 'cors'
 import http from 'http'
 import {Server} from "socket.io" 
-import fetch from "node-fetch";
-
 
 const PORT = process.env.PORT || 4000
 
@@ -16,21 +14,21 @@ const app = express();
 const server = http.createServer(app)
 const io = new Server(server, {
     cors: {
-        origin: "*",
+        origin: "https://trimana-pos-system-frontend.herokuapp.com",
         methods: ['GET', 'POST'],
         credentials: true
     }
 })
 app.use(cors({
-    origin: '*',
+    origin: 'https://trimana-pos-system-frontend.herokuapp.com',
 }))
 app.use(express.json())
  
 
 const URI = "mongodb+srv://Mike:cciQ6jfqxjt6Yo7C@cluster0.du0vf.mongodb.net/pos-systemDB?retryWrites=true&w=majority";
 const stripe = Stripe('sk_test_LmSrJNEvuxswULy5z2CFDcSe00jo5ryk69');
-const SERVER_DOMAIN = 'https://trimana-pos-backend-stg.herokuapp.com'
-const CLIENT_DOMAIN = 'https://trimana-pos-frontend-stg.herokuapp.com'
+const SERVER_DOMAIN = 'https://trimana-pos-central.herokuapp.com'
+const CLIENT_DOMAIN = 'https://trimana-pos-system-frontend.herokuapp.com'
 
 mongoose.connect(URI)
 .then((res) => console.log('database connected'))
@@ -38,17 +36,16 @@ mongoose.connect(URI)
 
 
 io.on("connection", socket => {
+    
 
     socket.on('join-room', (groupId) => {
         socket.join(groupId)
     })
 
-    socket.on('modified-menu-item', (data) => {
-        const regex = /special/
-        if(regex.test(data.meal.toLowerCase())){
-            socket.to(data.groupID).emit('display-item', "")
-        }
+    socket.on('added-menu-item', (data) => {
+        socket.to(data.groupId).emit('display-item', data)
     })
+    
 })
 
 
@@ -147,7 +144,7 @@ app.patch('/update-location/:id', (req,res) => {
 })
 
 app.patch('/update-user-printers/:id', (req,res) => {
-   console.log(req.body.action)
+   console.log(req.body.printer)
     if(req.body.action === "add"){
         User.findByIdAndUpdate(req.params.id,  { $push: { printers: req.body.printer} })
         .then((user) => {
@@ -160,7 +157,7 @@ app.patch('/update-user-printers/:id', (req,res) => {
         })
     }else if(req.body.action === "delete"){
         
-        User.findByIdAndUpdate({_id: req.params.id}, {$pull: {printers: {$elemMatch: req.body.printer}}})
+        User.updateOne({_id: req.params.id}, {$pull: {printers: {$elemMatch: req.body.printer}}})
         .then((user) => {
             if(!user){
                 res.status(404).send()
@@ -169,7 +166,10 @@ app.patch('/update-user-printers/:id', (req,res) => {
         }).catch((err) => {
             res.status(500).send(err)
         })
+    }else{
+
     }
+    
 })
 
 app.delete('/delete-user/:id', (req,res) => {
